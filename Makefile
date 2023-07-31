@@ -11,7 +11,7 @@ SNIPPETS += custom-snippets/random-vars.md
 SNIPPETS += custom-snippets/as-defs.md 
 SNIPPETS += custom-snippets/reserve-resources.md 
 SNIPPETS += fabric-snippets/configure-resources.md 
-SNIPPETS += custom-snippets/setup-ospf.md 
+SNIPPETS += custom-snippets/setup-frr.md 
 SNIPPETS += fabric-snippets/draw-topo.md 
 SNIPPETS += fabric-snippets/log-in.md 
 SNIPPETS += fabric-snippets/delete-slice.md
@@ -23,7 +23,7 @@ setup.ipynb: $(SNIPPETS)
 				custom-snippets/as-defs.md \
 				custom-snippets/reserve-resources.md \
                 fabric-snippets/configure-resources.md \
-				custom-snippets/setup-ospf.md \
+				custom-snippets/setup-frr.md \
 				fabric-snippets/draw-topo.md \
 				fabric-snippets/log-in.md \
 				fabric-snippets/delete-slice.md \
