@@ -1,8 +1,8 @@
 
 ::: {.cell .markdown}
-### Set up the routers and networks
+### Reserve resources
 
-First we will create a function that will generate an autonomous system along with the node configuration, net configuration, resource requirement data.
+Now we will get a list of sites that has sufficient resources for the experiment.
 :::
 
 
@@ -31,6 +31,10 @@ print(as_sites)
 ```
 :::
 
+::: {.cell .markdown}
+
+Then we will add hosts and network segments
+:::
 
 ::: {.cell .code}
 ```python
@@ -63,6 +67,14 @@ for i,r in enumerate(data_routers):
                                                      name=net["name"]).get_interfaces()[0] for node in net['nodes'] ]
         slice.add_l2network(name=net["name"], type='L2Bridge', interfaces=ifaces)
 ```
+:::
+
+
+::: {.cell .markdown}
+
+The following cell submits our request to the FABRIC site. The output of this cell will update automatically as the status of our request changes.
+While it is being prepared, the "State" of the slice will appear as "Configuring".
+When it is ready, the "State" of the slice will change to "StableOK".
 :::
 
 
