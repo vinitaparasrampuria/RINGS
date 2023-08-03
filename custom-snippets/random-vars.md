@@ -8,8 +8,6 @@ Next, we will set up the variables- number of autonomous sytems in the network, 
 
 ::: {.cell .code}
 ```python
-# install packages
-# this will take a while and will run in background while you do other steps
 import random
 #number of routers in access network similar irrespective of cdn or not
 #redundancy_AS_1 parameter sets the hop at which redundant paths will be set
