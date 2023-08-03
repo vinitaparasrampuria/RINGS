@@ -55,6 +55,6 @@ Validate the routing by running ping across the network
 ::: {.cell .code}
 ```python
 for r in data_routers:
-    slice.get_node(name=r[1][0]['name']).execute("ping -c 5 "+r[1][-1]['name']+" | grep rtt")   
+    slice.get_node(name=r[1][0]['name']).execute("ping -c 5 "+r[2][-1]['nodes'][-1]['addr']+" | grep rtt" )   
 ```
 :::
