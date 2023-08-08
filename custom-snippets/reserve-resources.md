@@ -13,7 +13,7 @@ Now we will get a list of sites that has sufficient resources for the experiment
 as_sites = []
 for i,r in enumerate(data_routers):   
     while True:
-        site_name = fablib.get_random_site(avoid=sites + as_sites)
+        site_name = fablib.get_random_site(avoid=as_sites)
         if ( (fablib.resources.get_core_available(site_name) > 1.2*r[3]['cores']) and
             (fablib.resources.get_component_available(site_name, 'SharedNIC-ConnectX-6') > 1.2**r[3]['nic']) ):
             break
