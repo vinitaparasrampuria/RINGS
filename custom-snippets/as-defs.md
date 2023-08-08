@@ -20,7 +20,7 @@ def create_AS(as_num, n_hops, r):
       "nodes": [{"name": "as"+str(as_num)+'-r-' + str(j) + '-' + str(i),   "addr": "10."+str(as_num)+"."+str(sum(r_mul[:j+1])+(routers[j+1]*i)+k+1)+"."+str(1)} ]+ 
       [{"name": "as"+str(as_num)+'-r-' + str(j+1) + '-' + str(k),   "addr": "10."+str(as_num)+"."+str(sum(r_mul[:j+1])+(routers[j+1]*i)+k+1)+"."+str(2)}]}
             for j,level in enumerate(routers[:-1]) for i in range(level) for k in range(routers[j+1])]
-    exp_conf = {'cores': sum([ n['cores'] for n in node_conf]), 'nic': sum([len(n['nodes']) for n in net_conf]) }
+    exp_conf = {'cores': sum([ n['cores'] for n in node_conf]), 'nic': sum([len(n['nodes'])+2 for n in net_conf]) }
     return [routers, node_conf, net_conf, exp_conf]
 
 ```
@@ -78,5 +78,18 @@ node_conf
 ```python
 net_conf = [net for as_conf in data_routers for net in as_conf[2]]
 net_conf
+```
+:::
+
+
+::: {.cell .code}
+```python
+as_net_conf=[{"router-1": r[1][-1]['name'], "router-2":data_routers[i+1][1][0]['name'], "net-name": "ext-net"+str(i)+"-"+str(i+1)} for i, r in enumerate(data_routers[:-1])]
+```
+:::
+
+::: {.cell .code}
+```python
+as_net_conf
 ```
 :::
