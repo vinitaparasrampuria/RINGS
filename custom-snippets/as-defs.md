@@ -84,7 +84,10 @@ net_conf
 
 ::: {.cell .code}
 ```python
-as_net_conf=[{"router-1": r[1][-1]['name'], "router-2":data_routers[i+1][1][0]['name'], "net-name": "ext-net"+str(i)+"-"+str(i+1)} for i, r in enumerate(data_routers[:-1])]
+as_net_conf=[{"net-name":"ext-net"+str(i)+"-"+str(i+1), "subnet": "100."+str(i)+"."+str(i+1)+".0/24",
+              "nodes": [{"name":r[1][-1]['name'], "addr":"100."+str(i)+"."+str(i+1)+".1"}]+
+              [{"name":data_routers[i+1][1][0]['name'], "addr":"100."+str(i)+"."+str(i+1)+".2"}]}
+              for i, r in enumerate(data_routers[:-1])]
 ```
 :::
 

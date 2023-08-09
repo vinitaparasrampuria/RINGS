@@ -68,8 +68,8 @@ for i,r in enumerate(data_routers):
         slice.add_l2network(name=net["name"], type='L2Bridge', interfaces=ifaces)
 
 for i,r in enumerate(as_net_conf):
-    iface1 = slice.get_node(r['router-1']).add_component(model='NIC_Basic', name=r['net-name']).get_interfaces()[0]
-    iface2 = slice.get_node(r['router-2']).add_component(model='NIC_Basic', name=r['net-name']).get_interfaces()[0]
+    iface1 = slice.get_node(r['nodes'][0]['name']).add_component(model='NIC_Basic', name=r['net-name']).get_interfaces()[0]
+    iface2 = slice.get_node(r['nodes'][1]['name']).add_component(model='NIC_Basic', name=r['net-name']).get_interfaces()[0]
     slice.add_l2network(name=r['net-name'], interfaces=[iface1, iface2])
 ```
 :::
