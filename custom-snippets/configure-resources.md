@@ -1,4 +1,9 @@
 
+::: {.cell .markdown}
+
+Now we will set up the interface connecting two autonomous systems.
+:::
+
 ::: {.cell .code}
 ```python
 # bring interfaces up and either assign an address (if there is one) or flush address

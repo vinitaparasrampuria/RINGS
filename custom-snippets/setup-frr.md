@@ -47,7 +47,7 @@ for n in router_nodes:
 
 ::: {.cell .markdown}
 
-Validate the routing by running ping across the network
+Validate the routing by running ping across the network within an Autonomous system:
 :::
 
 
@@ -79,7 +79,7 @@ for i, as_net in enumerate(as_net_conf):
 
 ::: {.cell .markdown}
 
-Validate the external routing by running ping across the network from first AS to last AS
+Validate the external routing by running ping across the network from first AS to last AS:
 :::
 
 ::: {.cell .code}
