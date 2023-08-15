@@ -55,8 +55,9 @@ Validate the routing by running ping across the network within an Autonomous sys
 ::: {.cell .code}
 ```python
 for r in data_routers:
-    print([i['addr'] for i in r[2][-1]['nodes']])
-    [(slice.get_node(name=r[1][0]['name']).execute("ping -c 5 "+i['addr'] +" | grep rtt")) for i in r[2][-1]['nodes']]  
+    if r[2]:
+        print([i['addr'] for i in r[2][-1]['nodes'] ])
+        [(slice.get_node(name=r[1][0]['name']).execute("ping -c 5 "+i['addr'] +" | grep rtt")) for i in r[2][-1]['nodes']]
 ```
 :::
 
