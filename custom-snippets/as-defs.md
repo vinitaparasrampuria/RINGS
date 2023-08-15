@@ -98,7 +98,7 @@ as_net_conf=[{"net-name":"ext-net"+str(i)+"-"+str(i+1), "subnet": "192.168."+str
 ```
 :::
 
-::: {.cell .code}go
+::: {.cell .code}
 ```python
 as_net_conf
 ```
