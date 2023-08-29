@@ -34,7 +34,6 @@ max_hops_intermediate_not_cdn=4
 
 # Set cdn=True if CDN type opf network is required else False
 cdn=True
-sites=['NCSA', 'GATECH', 'WASH', 'GPN', 'INDI', 'SALT', 'CERN', 'MICH', 'DALL', 'STAR', 'EDC', 'PSC']
 ```
 :::
 

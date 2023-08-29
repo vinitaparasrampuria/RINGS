@@ -47,7 +47,7 @@ for n in router_nodes:
 
 ::: {.cell .markdown}
 
-Validate the routing by running ping across the network within an Autonomous system:
+Validate internal routing by running ping across the network within an Autonomous system:
 :::
 
 
@@ -56,7 +56,6 @@ Validate the routing by running ping across the network within an Autonomous sys
 ```python
 for r in data_routers:
     if r[2]:
-        print([i['addr'] for i in r[2][-1]['nodes'] ])
         [(slice.get_node(name=r[1][0]['name']).execute("ping -c 5 "+i['addr'] +" | grep rtt")) for i in r[2][-1]['nodes']]
 ```
 :::
@@ -67,12 +66,17 @@ Setup BGP as the exterior routing protocol:
 
 ::: {.cell .code}
 ```python
-for i, as_net in enumerate(as_net_conf):
+import re
+for i, as_net in enumerate(out_as_net_conf):
     nodes=[slice.get_node(name=r['name']) for r in as_net['nodes']]
+    print(as_net['nodes'][0])
     print(as_net['nodes'][1])
-   
     for node_num, n in enumerate(nodes):
-        n.execute("sudo vtysh -E -c'configure terminal\nrouter bgp "+str(i+node_num+1)+ "00\nno bgp ebgp-requires-policy\nno bgp network import-check\nneighbor "+ as_net['nodes'][(node_num+1)%2]['addr']+ " remote-as " + str((1+node_num)%2+i+1) +"00\nredistribute ospf\nexit\nrouter ospf\nredistribute bgp\nredistribute connected\nexit\n exit'  ")  
+        as_no=int(re.search(r'as(\d+)-',n.get_name()).group(1))+1
+        neighbor=as_net['nodes'][(node_num+1)%2]['addr']
+        neighbor_as=int(as_net['nodes'][(1+node_num)%2]['name'][2])+1
+        n.execute("sudo vtysh -E -c'configure terminal\nrouter bgp "+str(as_no)+ "00\nno bgp ebgp-requires-policy\nno bgp network import-check\nneighbor "+ neighbor + " remote-as " + str(neighbor_as) +"00\nredistribute ospf\nexit\nrouter ospf\nredistribute bgp\nredistribute connected\nexit\n exit'  ")  
+ 
         
 ```
 :::
@@ -85,6 +89,6 @@ Validate the external routing by running ping across the network from first AS t
 
 ::: {.cell .code}
 ```python
-[(slice.get_node(name=net_conf[0]['nodes'][0]['name']).execute("ping -c 5 "+i['addr'])) for i in net_conf[-1]['nodes']]
+[(slice.get_node(name=net_conf[0]['nodes'][0]['name']).execute("ping -c 5 "+i['addr'])) for i in as_net_conf[-1]['nodes']]
 ```
 :::

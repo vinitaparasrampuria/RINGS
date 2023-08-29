@@ -39,12 +39,12 @@ Then we will add hosts and network segments
 ::: {.cell .code}
 ```python
 for i,r in enumerate(data_routers):
-     for rtr in r[1]: # iterate over the nodes_conf for this AS
-        slice.add_node(name=rtr['name'], site=as_sites[i], 
-                       cores=rtr['cores'], 
-                       ram=rtr['ram'], 
-                       disk=rtr['disk'], 
-                       image=rtr['image'])
+     for n in r[1]: # iterate over the nodes_conf for this AS
+        slice.add_node(name=n['name'], site=as_sites[i], 
+                       cores=n['cores'], 
+                       ram=n['ram'], 
+                       disk=n['disk'], 
+                       image=n['image'])
 ```
 :::
 
@@ -61,16 +61,10 @@ print(slice.list_nodes())
 ::: {.cell .code}
 ```python
 # this cell sets up the network links 
-for i,r in enumerate(data_routers):
-     for net in r[2]: # iterate over net_conf for each AS
-        ifaces = [slice.get_node(node["name"]).add_component(model="NIC_Basic", 
-                                                     name=net["name"]).get_interfaces()[0] for node in net['nodes'] ]
-        slice.add_l2network(name=net["name"], type='L2Bridge', interfaces=ifaces)
-
-for i,r in enumerate(as_net_conf):
-    iface1 = slice.get_node(r['nodes'][0]['name']).add_component(model='NIC_Basic', name=r['net-name']).get_interfaces()[0]
-    iface2 = slice.get_node(r['nodes'][1]['name']).add_component(model='NIC_Basic', name=r['net-name']).get_interfaces()[0]
-    slice.add_l2network(name=r['net-name'], interfaces=[iface1, iface2])
+for n in net_conf:
+    ifaces = [slice.get_node(node["name"]).add_component(model="NIC_Basic", 
+                                                 name=n["name"]).get_interfaces()[0] for node in n['nodes'] ]
+    slice.add_l2network(name=n["name"], interfaces=ifaces)
 ```
 :::
 
