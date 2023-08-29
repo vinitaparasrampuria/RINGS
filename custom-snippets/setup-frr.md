@@ -75,7 +75,7 @@ for i, as_net in enumerate(out_as_net_conf):
         as_no=int(re.search(r'as(\d+)-',n.get_name()).group(1))+1
         neighbor=as_net['nodes'][(node_num+1)%2]['addr']
         neighbor_as=int(as_net['nodes'][(1+node_num)%2]['name'][2])+1
-        n.execute("sudo vtysh -E -c'configure terminal\nrouter bgp "+str(as_no)+ "00\nno bgp ebgp-requires-policy\nno bgp network import-check\nneighbor "+ neighbor + " remote-as " + str(neighbor_as) +"00\nredistribute ospf \nredistribute connected \nexit\nrouter ospf \nredistribute bgp \nredistribute connected \nexit\n exit'  ")  
+        n.execute("sudo vtysh -E -c'configure terminal\nrouter bgp "+str(as_no)+ "00\nno bgp ebgp-requires-policy\nno bgp network import-check\nneighbor "+ neighbor + " remote-as " + str(neighbor_as) +"00\nredistribute ospf\nexit\nrouter ospf\nredistribute bgp\nredistribute connected\nexit\n exit'  ")  
  
         
 ```
